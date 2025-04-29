@@ -5,8 +5,6 @@
 package model;
 
 import dao.UserDAO;
-import dao.MySQLConnexion;
-import java.sql.Connection;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 

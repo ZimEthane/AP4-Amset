@@ -15,9 +15,13 @@ import java.util.logging.Logger;
  */
 public class MySQLConnexion {
 
-    private static String url = "jdbc:mysql://localhost:3306/ap4user";
-    private static String user = "root"; // utilisateur mysql ou de la BDD
-    private static String pass = ""; // mot de passe mysql ou de la BDD
+//    private static String url = "jdbc:mysql://localhost:3306/ap4user";
+//    private static String user = "root"; // utilisateur mysql ou de la BDD
+//    private static String pass = ""; // mot de passe mysql ou de la BDD
+//    private static Connection con = null;
+    private static String url = "jdbc:mysql://172.28.37.19/AP4User";
+    private static String user = "testUser"; // utilisateur mysql ou de la BDD
+    private static String pass = "123456789"; // mot de passe mysql ou de la BDD
     private static Connection con = null;
 
     // Méthode static qui va créer la connexion entre le serveur et la BDD.

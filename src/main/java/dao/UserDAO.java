@@ -32,7 +32,7 @@ public class UserDAO {
     // Méthode récupérant tout les utilisateurs dans la base donnée.
     public ArrayList<User> findAll() {
         try {
-            String query = "SELECT * FROM user";
+            String query = "SELECT * FROM USER";
             PreparedStatement ps = this.connexion.prepareStatement(query);
             ResultSet res = ps.executeQuery();
 
@@ -58,7 +58,7 @@ public class UserDAO {
     // Méthode récupérant un User
     public ArrayList<User> find() {
         try {
-            String query = "SELECT * FROM user";
+            String query = "SELECT * FROM USER";
             PreparedStatement ps = this.connexion.prepareStatement(query);
             ResultSet res = ps.executeQuery();
 
@@ -84,7 +84,7 @@ public class UserDAO {
     // Méthode pour Update un user
     public User UpdateUser(User user) {
         try {
-            String query = "Update user SET PRENOM_USER = ?, NOM_USER = ?, IDENTIFIANT_USER = ?, MOT_DE_PASSE_USER = ?, ADRESSE_MAIL_USER = ? WHERE ID_USER = ?";
+            String query = "UPDATE USER SET PRENOM_USER = ?, NOM_USER = ?, IDENTIFIANT_USER = ?, MOT_DE_PASSE_USER = ?, ADRESSE_MAIL_USER = ? WHERE ID_USER = ?";
             PreparedStatement ps = this.connexion.prepareStatement(query);
             ps.setString(1, user.getPrenom());
             ps.setString(2, user.getNom());
@@ -102,7 +102,7 @@ public class UserDAO {
 
     public void delete(int IdUser) {
         try {
-            String query = "DELETE FROM user WHERE ID_USER = ? ";
+            String query = "DELETE FROM USER WHERE ID_USER = ? ";
             PreparedStatement ps = this.connexion.prepareStatement(query);
             ps.setInt(1, IdUser);
             ps.executeUpdate();
@@ -114,7 +114,7 @@ public class UserDAO {
 
     public User createUser(User utilisateur) {
         try {
-            String query = "INSERT INTO user ( `PRENOM_USER`, `NOM_USER`, `IDENTIFIANT_USER`, `MOT_DE_PASSE_USER`, `ADRESSE_MAIL_USER`) VALUES (?,?,?,?,?)";
+            String query = "INSERT INTO USER ( `PRENOM_USER`, `NOM_USER`, `IDENTIFIANT_USER`, `MOT_DE_PASSE_USER`, `ADRESSE_MAIL_USER`) VALUES (?,?,?,?,?)";
             PreparedStatement ps = this.connexion.prepareStatement(query);
             System.out.println(query);
             ps.setString(1, utilisateur.getPrenom());
