@@ -83,8 +83,10 @@ public class MainView extends javax.swing.JFrame {
         usersList = new javax.swing.JTable();
         buttonDeleteUser = new javax.swing.JButton();
         buttonUpdateUser = new javax.swing.JButton();
+        jLabelPageListeUtilisateur = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 600));
 
         buttonNewUser.setText("Ajouter");
         buttonNewUser.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +119,9 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
+        jLabelPageListeUtilisateur.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        jLabelPageListeUtilisateur.setText("Page Liste Utilisateur");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,25 +131,31 @@ public class MainView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(buttonNewUser)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 704, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(buttonUpdateUser)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(buttonDeleteUser))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 704, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(buttonDeleteUser))))
                 .addContainerGap(48, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelPageListeUtilisateur)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(59, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabelPageListeUtilisateur)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(buttonNewUser)
-                .addGap(59, 59, 59)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonDeleteUser)
-                    .addComponent(buttonUpdateUser))
-                .addGap(73, 73, 73))
+                    .addComponent(buttonUpdateUser)
+                    .addComponent(buttonDeleteUser))
+                .addGap(102, 102, 102))
         );
 
         pack();
@@ -169,6 +180,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton buttonDeleteUser;
     private javax.swing.JButton buttonNewUser;
     private javax.swing.JButton buttonUpdateUser;
+    private javax.swing.JLabel jLabelPageListeUtilisateur;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable usersList;
     // End of variables declaration//GEN-END:variables
