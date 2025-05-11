@@ -26,32 +26,44 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="147" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="prenom" min="-2" max="-2" attributes="0"/>
-                  <Component id="name" min="-2" max="-2" attributes="0"/>
-                  <Component id="identifiant" min="-2" max="-2" attributes="0"/>
-                  <Component id="mpd" min="-2" max="-2" attributes="0"/>
-                  <Component id="mail" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="ValideAjoutUser" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="addNomUser" alignment="1" min="-2" pref="340" max="-2" attributes="0"/>
-                      <Component id="addPrenomUser" alignment="1" min="-2" pref="340" max="-2" attributes="0"/>
-                      <Component id="addIdentifitantUser" alignment="1" min="-2" pref="340" max="-2" attributes="0"/>
-                      <Component id="addMotDePasseUser" alignment="1" min="-2" pref="340" max="-2" attributes="0"/>
-                      <Component id="addEmailUser" alignment="1" min="-2" pref="340" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabelPageAjoutUtilisateur" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="prenom" min="-2" max="-2" attributes="0"/>
+                          <Component id="name" min="-2" max="-2" attributes="0"/>
+                          <Component id="identifiant" min="-2" max="-2" attributes="0"/>
+                          <Component id="mpd" min="-2" max="-2" attributes="0"/>
+                          <Component id="verifMdp" min="-2" max="-2" attributes="0"/>
+                          <Component id="mail" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="ValideAjoutUser" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="addNomUser" alignment="1" min="-2" pref="340" max="-2" attributes="0"/>
+                                  <Component id="addPrenomUser" alignment="1" min="-2" pref="340" max="-2" attributes="0"/>
+                                  <Component id="addIdentifitantUser" alignment="1" min="-2" pref="340" max="-2" attributes="0"/>
+                                  <Component id="addMotDePasseUser" alignment="1" min="-2" pref="340" max="-2" attributes="0"/>
+                                  <Component id="addVerifMotDePasseUser" alignment="1" min="-2" pref="340" max="-2" attributes="0"/>
+                                  <Component id="addEmailUser" alignment="1" min="-2" pref="340" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="checkBoxAddAfficheVerifMDP" min="-2" max="-2" attributes="0"/>
+                                  <Component id="checkBoxAddAfficheNewMDP" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="225" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabelPageAjoutUtilisateur" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="51" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,9 +72,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabelPageAjoutUtilisateur" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                       <Component id="addPrenomUser" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -74,25 +86,29 @@
                           <Component id="addIdentifitantUser" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="identifiant" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="addMotDePasseUser" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="mpd" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="addEmailUser" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="mail" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
-                      <Component id="name" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="name" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="addMotDePasseUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="mpd" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="checkBoxAddAfficheNewMDP" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="addVerifMotDePasseUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="verifMdp" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="checkBoxAddAfficheVerifMDP" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="addEmailUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="mail" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="ValideAjoutUser" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="233" max="32767" attributes="0"/>
+              <EmptySpace pref="144" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -132,18 +148,10 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="addPrenomUser">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addPrenomUserActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="addNomUser">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addNomUserActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="addIdentifitantUser">
-    </Component>
-    <Component class="javax.swing.JTextField" name="addMotDePasseUser">
     </Component>
     <Component class="javax.swing.JTextField" name="addEmailUser">
     </Component>
@@ -154,6 +162,31 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Page Ajout Utilisateur"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="addMotDePasseUser">
+    </Component>
+    <Component class="javax.swing.JLabel" name="verifMdp">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Verification mot-de-passe"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="addVerifMotDePasseUser">
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="checkBoxAddAfficheNewMDP">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Afficher le Mot de Passe"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkBoxAddAfficheNewMDPActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="checkBoxAddAfficheVerifMDP">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Afficher le Mot de Passe"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkBoxAddAfficheVerifMDPActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

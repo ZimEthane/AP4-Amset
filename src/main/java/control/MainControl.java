@@ -21,13 +21,13 @@ import view.UpdateUserDialog;
  */
 public class MainControl implements PropertyChangeListener {
 
-    //atribue
+    //atribue -------------------------------------------------------------------------------
     MainView view;
     private UsersListModel usersListModel;
     private UpdateUserDialog updateUserDialog;
     private AddUserDialog addUserDialog;
 
-    // Constructeur
+    // Constructeur -------------------------------------------------------------------------------
     public MainControl(MainView v) {
         this.usersListModel = new UsersListModel();
 
@@ -43,6 +43,7 @@ public class MainControl implements PropertyChangeListener {
 
     }
 
+    // Methodes -------------------------------------------------------------------------------
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
 
@@ -54,19 +55,14 @@ public class MainControl implements PropertyChangeListener {
             case "MainViewDeleteUser":
                 int confirm = JOptionPane.showConfirmDialog(
                         this.view,
-                        this.view.message("Voulez-vous supprimer cet utilisateur ?"),
-                        "Confirmation de suppression",
-                        JOptionPane.YES_NO_CANCEL_OPTION
+                        this.view.message("Voulez-vous supprimer cet utilisateur ?"), "Confirmation de suppression",
+                        JOptionPane.YES_NO_OPTION
                 );
 
                 if (confirm == JOptionPane.YES_OPTION) {
                     try {
                         int selectedUserId = this.view.getSelectedId();
-
-                        UserDAO userDao = new UserDAO();
-                        userDao.delete(selectedUserId);
-
-                        this.view.setTableModel(new UsersListModel());
+                        this.usersListModel.delete(selectedUserId);
 
                         JOptionPane.showMessageDialog(this.view, "Utilisateur supprimé avec succès.");
                     } catch (ArrayIndexOutOfBoundsException e) {
@@ -80,8 +76,14 @@ public class MainControl implements PropertyChangeListener {
 
             // permet d'afficher les message de confirmation pour le modifier un user
             case "MainViewUpdateUser":
-                int retour = JOptionPane.showConfirmDialog(this.view, "Êtes-vous sûr de modifier cet utilisateur ?");
+                updateUserDialog.setDefaultData();
+                int retour = JOptionPane.showConfirmDialog(
+                        this.view,
+                        this.view.message("Êtes-vous sûr de modifier cet utilisateur ?"), "Confirmation de suppression",
+                        JOptionPane.YES_NO_OPTION
+                );
                 if (retour == JOptionPane.YES_OPTION) {
+
                     // recuperation des information de l'utilisateur selectionner
                     this.updateUserDialog.setID(this.view.getSelectID());
                     this.updateUserDialog.setPrenom(this.view.getSelectPrenom());
@@ -96,26 +98,53 @@ public class MainControl implements PropertyChangeListener {
                     JOptionPane.showMessageDialog(this.view, "Modification annuler");
                 }
                 break;
-            // permet de verifier 
-            case "validModif":
-                usersListModel.update(
-                        updateUserDialog.getId(),
-                        updateUserDialog.getPrenom(),
-                        updateUserDialog.getNom(),
-                        updateUserDialog.getIdentifiant(),
-                        updateUserDialog.getMotDePasse(),
-                        updateUserDialog.getAdresseEmail());
-                updateUserDialog.setVisible(false);
-                break;
 
+            // permet de verifier les modif
+            case "validModifUser":
+                switch (this.updateUserDialog.verifeFormulaire()) {
+                    case 1:
+                        this.updateUserDialog.erreurChamps();
+                        break;
+                    case 2:
+                        this.updateUserDialog.erreurMDP();
+                        break;
+                    case 3:
+                        this.updateUserDialog.erreurEmails();
+                        break;
+                    case 4:
+                        usersListModel.update(
+                                updateUserDialog.getId(),
+                                updateUserDialog.getPrenom(),
+                                updateUserDialog.getNom(),
+                                updateUserDialog.getIdentifiant(),
+                                updateUserDialog.getMotDePasse(),
+                                updateUserDialog.getAdresseEmail());
+                        updateUserDialog.setVisible(false);
+                        break;
+                }
+                break;
+            // permet de verifier l'ajout
             case "ValideAjoutUser":
-                usersListModel.create(
-                        addUserDialog.getPrenom(),
-                        addUserDialog.getNom(),
-                        addUserDialog.getIdentifiant(),
-                        addUserDialog.getMotDePasse(),
-                        addUserDialog.getAdresseEmail());
-                addUserDialog.setVisible(false);
+                switch (this.addUserDialog.verifeFormulaire()) {
+                    case 1:
+                        this.addUserDialog.erreurChamps();
+                        break;
+                    case 2:
+                        this.addUserDialog.erreurMDP();
+                        break;
+                    case 3:
+                        this.addUserDialog.erreurEmails();
+                        break;
+                    case 4:
+                        usersListModel.create(
+                                addUserDialog.getPrenom(),
+                                addUserDialog.getNom(),
+                                addUserDialog.getIdentifiant(),
+                                addUserDialog.getMotDePasse(),
+                                addUserDialog.getAdresseEmail());
+                        addUserDialog.setVisible(false);
+                        break;
+                }
                 break;
         }
     }

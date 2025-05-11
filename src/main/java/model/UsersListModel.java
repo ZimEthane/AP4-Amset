@@ -23,7 +23,6 @@ public class UsersListModel extends AbstractTableModel {
     public UsersListModel() {
         this.userDAO = new UserDAO();
         users = this.userDAO.findAll();
-        this.fireTableDataChanged();
     }
 
     // Methodes
@@ -47,6 +46,12 @@ public class UsersListModel extends AbstractTableModel {
 
     public void create(String prenom, String nom, String identifiant, String mdp, String adresse_mail) {
         this.userDAO.createUser(new User(prenom, nom, identifiant, mdp, adresse_mail));
+        this.users = this.userDAO.findAll();
+        this.fireTableDataChanged();
+    }
+
+    public void delete(int id) {
+        this.userDAO.delete(id);
         this.users = this.userDAO.findAll();
         this.fireTableDataChanged();
     }

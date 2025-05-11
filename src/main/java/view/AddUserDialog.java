@@ -6,6 +6,7 @@ package view;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,24 +14,21 @@ import java.beans.PropertyChangeSupport;
  */
 public class AddUserDialog extends javax.swing.JDialog {
 
+    //attribue -------------------------------------------------------------------------------
     private PropertyChangeSupport listeners = new PropertyChangeSupport(this);
 
+    // Constructeur -------------------------------------------------------------------------------
+    public AddUserDialog(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+    }
+
+    // Methodes -------------------------------------------------------------------------------
     public void addPropertyChangeListener(PropertyChangeListener l) {
         this.listeners.addPropertyChangeListener(l);
     }
 
-    /**
-     * Creates new form AddUserDialog
-     */
-    public AddUserDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-//     inserte.addActionListener(e -> {
-//         frame.dispose()
-//     });
-    }
-
-    // get
+    // get -------------------------------------------------------------------------------
     public String getPrenom() {
         return this.addPrenomUser.getText();
     }
@@ -47,11 +45,15 @@ public class AddUserDialog extends javax.swing.JDialog {
         return this.addMotDePasseUser.getText();
     }
 
+    public String getVerifMotDePasseUser() {
+        return this.addVerifMotDePasseUser.getText();
+    }
+
     public String getAdresseEmail() {
         return this.addEmailUser.getText();
     }
 
-    // Set
+    // Set -------------------------------------------------------------------------------
     public void setPrenom(String prenom) {
         this.addPrenomUser.setText(prenom);
     }
@@ -68,8 +70,54 @@ public class AddUserDialog extends javax.swing.JDialog {
         this.addMotDePasseUser.setText(motDePasse);
     }
 
+    public void setVerifMotDePasseUser(String verifMdp) {
+        this.addVerifMotDePasseUser.setText(verifMdp);
+    }
+
     public void setAdresseEmail(String adresseEmail) {
         this.addEmailUser.setText(adresseEmail);
+    }
+
+    // Autre méthodes -------------------------------------------------------------------------------
+    public boolean verifMotDePasse() {
+        if (String.valueOf(this.addMotDePasseUser.getPassword()).equals(String.valueOf(this.addVerifMotDePasseUser.getPassword()))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public int verifeFormulaire() {
+        String email = getAdresseEmail();
+        if (addPrenomUser.getText().equals("")
+                || addNomUser.getText().equals("")
+                || addIdentifitantUser.getText().equals("")
+                || addEmailUser.getText().equals("")
+                || String.valueOf(this.addMotDePasseUser.getPassword()).equals("")) {
+            return 1;
+        } else if (!String.valueOf(this.addMotDePasseUser.getPassword()).equals(String.valueOf(this.addVerifMotDePasseUser.getPassword()))) {
+            return 2;
+        } else if (!isEmailValid(email)) {
+            return 3;
+        } else {
+            return 4;
+        }
+    }
+
+    public void erreurChamps() {
+        JOptionPane.showMessageDialog(this, "Champs de saisie obligatoire !");
+    }
+
+    public void erreurMDP() {
+        JOptionPane.showMessageDialog(this, "Vérification du mot de passe incorrect !");
+    }
+
+    public void erreurEmails() {
+        JOptionPane.showMessageDialog(this, "Adresse email invalide.");
+    }
+
+    public boolean isEmailValid(String email) {
+        return email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$");
     }
 
     //set defaultData
@@ -78,7 +126,14 @@ public class AddUserDialog extends javax.swing.JDialog {
         this.addNomUser.setText("");
         this.addIdentifitantUser.setText("");
         this.addMotDePasseUser.setText("");
+        this.addVerifMotDePasseUser.setText("");
         this.addEmailUser.setText("");
+
+        this.checkBoxAddAfficheNewMDP.setSelected(false);
+        this.checkBoxAddAfficheVerifMDP.setSelected(false);
+
+        this.addMotDePasseUser.setEchoChar('*');
+        this.addVerifMotDePasseUser.setEchoChar('*');
     }
 
     /**
@@ -99,9 +154,13 @@ public class AddUserDialog extends javax.swing.JDialog {
         addPrenomUser = new javax.swing.JTextField();
         addNomUser = new javax.swing.JTextField();
         addIdentifitantUser = new javax.swing.JTextField();
-        addMotDePasseUser = new javax.swing.JTextField();
         addEmailUser = new javax.swing.JTextField();
         jLabelPageAjoutUtilisateur = new javax.swing.JLabel();
+        addMotDePasseUser = new javax.swing.JPasswordField();
+        verifMdp = new javax.swing.JLabel();
+        addVerifMotDePasseUser = new javax.swing.JPasswordField();
+        checkBoxAddAfficheNewMDP = new javax.swing.JCheckBox();
+        checkBoxAddAfficheVerifMDP = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 600));
@@ -123,56 +182,68 @@ public class AddUserDialog extends javax.swing.JDialog {
             }
         });
 
-        addPrenomUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addPrenomUserActionPerformed(evt);
-            }
-        });
-
-        addNomUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addNomUserActionPerformed(evt);
-            }
-        });
-
         jLabelPageAjoutUtilisateur.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         jLabelPageAjoutUtilisateur.setText("Page Ajout Utilisateur");
+
+        verifMdp.setText("Verification mot-de-passe");
+
+        checkBoxAddAfficheNewMDP.setText("Afficher le Mot de Passe");
+        checkBoxAddAfficheNewMDP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkBoxAddAfficheNewMDPActionPerformed(evt);
+            }
+        });
+
+        checkBoxAddAfficheVerifMDP.setText("Afficher le Mot de Passe");
+        checkBoxAddAfficheVerifMDP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkBoxAddAfficheVerifMDPActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 147, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(prenom)
-                    .addComponent(name)
-                    .addComponent(identifiant)
-                    .addComponent(mpd)
-                    .addComponent(mail))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ValideAjoutUser)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(addNomUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(addPrenomUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(addIdentifitantUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(addMotDePasseUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(addEmailUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(225, 225, 225))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelPageAjoutUtilisateur)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelPageAjoutUtilisateur))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(prenom)
+                            .addComponent(name)
+                            .addComponent(identifiant)
+                            .addComponent(mpd)
+                            .addComponent(verifMdp)
+                            .addComponent(mail))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ValideAjoutUser)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(addNomUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(addPrenomUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(addIdentifitantUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(addMotDePasseUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(addVerifMotDePasseUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(addEmailUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(checkBoxAddAfficheVerifMDP)
+                                    .addComponent(checkBoxAddAfficheNewMDP))))))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelPageAjoutUtilisateur)
+                .addGap(107, 107, 107)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
                         .addComponent(addPrenomUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -181,38 +252,51 @@ public class AddUserDialog extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addIdentifitantUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(identifiant))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(addMotDePasseUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(mpd))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(addEmailUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(mail)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(name)))
+                            .addComponent(identifiant)))
+                    .addComponent(name))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addMotDePasseUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mpd)
+                    .addComponent(checkBoxAddAfficheNewMDP))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addVerifMotDePasseUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(verifMdp)
+                    .addComponent(checkBoxAddAfficheVerifMDP))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addEmailUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mail))
                 .addGap(18, 18, 18)
                 .addComponent(ValideAjoutUser)
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void ValideAjoutUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValideAjoutUserActionPerformed
-        // TODO add your handling code here:
+
         listeners.firePropertyChange("ValideAjoutUser", null, null);
+
     }//GEN-LAST:event_ValideAjoutUserActionPerformed
 
-    private void addPrenomUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPrenomUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addPrenomUserActionPerformed
+    private void checkBoxAddAfficheNewMDPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxAddAfficheNewMDPActionPerformed
+        if (checkBoxAddAfficheNewMDP.isSelected()) {
+            addMotDePasseUser.setEchoChar((char) 0);
+        } else {
+            addMotDePasseUser.setEchoChar('*');
+        }
+    }//GEN-LAST:event_checkBoxAddAfficheNewMDPActionPerformed
 
-    private void addNomUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNomUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addNomUserActionPerformed
+    private void checkBoxAddAfficheVerifMDPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxAddAfficheVerifMDPActionPerformed
+        if (checkBoxAddAfficheVerifMDP.isSelected()) {
+            addVerifMotDePasseUser.setEchoChar((char) 0);
+        } else {
+            addVerifMotDePasseUser.setEchoChar('*');
+        }
+    }//GEN-LAST:event_checkBoxAddAfficheVerifMDPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,14 +344,18 @@ public class AddUserDialog extends javax.swing.JDialog {
     private javax.swing.JButton ValideAjoutUser;
     private javax.swing.JTextField addEmailUser;
     private javax.swing.JTextField addIdentifitantUser;
-    private javax.swing.JTextField addMotDePasseUser;
+    private javax.swing.JPasswordField addMotDePasseUser;
     private javax.swing.JTextField addNomUser;
     private javax.swing.JTextField addPrenomUser;
+    private javax.swing.JPasswordField addVerifMotDePasseUser;
+    private javax.swing.JCheckBox checkBoxAddAfficheNewMDP;
+    private javax.swing.JCheckBox checkBoxAddAfficheVerifMDP;
     private javax.swing.JLabel identifiant;
     private javax.swing.JLabel jLabelPageAjoutUtilisateur;
     private javax.swing.JLabel mail;
     private javax.swing.JLabel mpd;
     private javax.swing.JLabel name;
     private javax.swing.JLabel prenom;
+    private javax.swing.JLabel verifMdp;
     // End of variables declaration//GEN-END:variables
 }

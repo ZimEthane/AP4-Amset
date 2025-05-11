@@ -24,36 +24,48 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabelPageModifUtilisateur" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="361" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jLabelPrenomUser" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelNomUser" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelIdentifiantUser" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelMotDePasseUser" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelAdresseEmailUser" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="updateNomUser" min="-2" pref="400" max="-2" attributes="0"/>
-                          <Component id="updateIdentifiantUser" min="-2" pref="400" max="-2" attributes="0"/>
-                          <Component id="updatePrenomUser" min="-2" pref="400" max="-2" attributes="0"/>
-                          <Component id="updateMotDePasseUser" alignment="0" min="-2" pref="400" max="-2" attributes="0"/>
-                          <Component id="updateAdresseMailUser" alignment="0" min="-2" pref="400" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jButtonValiderModif" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jButtonRetour" min="-2" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Component id="jLabelVerifMotDePasseUser" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabelPageModifUtilisateur" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelAdresseEmailUser" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="0" pref="171" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="updateVerifMotDePasseUser" max="32767" attributes="0"/>
+                  <Component id="updateNomUser" max="32767" attributes="0"/>
+                  <Component id="updateIdentifiantUser" max="32767" attributes="0"/>
+                  <Component id="updatePrenomUser" max="32767" attributes="0"/>
+                  <Component id="updateAdresseMailUser" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jButtonValiderModif" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jButtonRetour" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="updateMotDePasseUser" alignment="0" min="-2" pref="400" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="checkBoxModifAfficheVerifMDP" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="checkBoxModifAfficheNewMDP" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -62,7 +74,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabelPageModifUtilisateur" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="updatePrenomUser" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelPrenomUser" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -79,20 +91,27 @@
               </Group>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="updateMotDePasseUser" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelMotDePasseUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="updateMotDePasseUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="checkBoxModifAfficheNewMDP" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="updateVerifMotDePasseUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelVerifMotDePasseUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="checkBoxModifAfficheVerifMDP" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="updateAdresseMailUser" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelAdresseEmailUser" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonValiderModif" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonRetour" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="166" max="32767" attributes="0"/>
+              <EmptySpace pref="161" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -140,26 +159,12 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="updatePrenomUser">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updatePrenomUserActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="updateIdentifiantUser">
     </Component>
-    <Component class="javax.swing.JTextField" name="updateMotDePasseUser">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateMotDePasseUserActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JTextField" name="updateNomUser">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateNomUserActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="updateAdresseMailUser">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateAdresseMailUserActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelPageModifUtilisateur">
       <Properties>
@@ -168,6 +173,31 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Page Modif Utilisateur"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="updateMotDePasseUser">
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="updateVerifMotDePasseUser">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelVerifMotDePasseUser">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Verification mot-de-passe"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="checkBoxModifAfficheVerifMDP">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Afficher le Mot de Passe"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkBoxModifAfficheVerifMDPActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="checkBoxModifAfficheNewMDP">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Afficher le Mot de Passe"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkBoxModifAfficheNewMDPActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

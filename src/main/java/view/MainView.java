@@ -15,10 +15,15 @@ import javax.swing.table.AbstractTableModel;
  */
 public class MainView extends javax.swing.JFrame {
 
-    //atribue
+    //attribue -------------------------------------------------------------------------------
     private PropertyChangeSupport listeners = new PropertyChangeSupport(this);
 
-    //methodes
+    // Constructeur -------------------------------------------------------------------------------
+    public MainView() {
+        initComponents();
+    }
+
+    //methodes -------------------------------------------------------------------------------
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         listeners.addPropertyChangeListener(listener);
     }
@@ -36,8 +41,11 @@ public class MainView extends javax.swing.JFrame {
         this.usersList.setModel(tableModel);
 
         this.usersList.removeColumn(this.usersList.getColumn("ID"));
+
+        this.usersList.removeColumn(this.usersList.getColumn("PASSWORD"));
     }
 
+    // get -------------------------------------------------------------------------------
     public int getSelectID() {
         return (int) this.usersList.getModel().getValueAt(this.usersList.getSelectedRow(), 0);
     }
@@ -61,13 +69,7 @@ public class MainView extends javax.swing.JFrame {
     public String getSelectAdresseEmail() {
         return (String) this.usersList.getModel().getValueAt(this.usersList.getSelectedRow(), 5);
     }
-
-    /**
-     * Creates new form MainView
-     */
-    public MainView() {
-        initComponents();
-    }
+    // Set -------------------------------------------------------------------------------
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -164,7 +166,7 @@ public class MainView extends javax.swing.JFrame {
     private void buttonNewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNewUserActionPerformed
         listeners.firePropertyChange("MainViewNewUser", null, null);
         listeners.firePropertyChange("UpdateUserViewValider", null, null);
-        listeners.firePropertyChange("AddUserDialog", null ,null);
+        listeners.firePropertyChange("AddUserDialog", null, null);
     }//GEN-LAST:event_buttonNewUserActionPerformed
 
     private void buttonDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteUserActionPerformed

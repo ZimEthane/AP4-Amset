@@ -6,6 +6,7 @@ package view;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,17 +14,22 @@ import java.beans.PropertyChangeSupport;
  */
 public class UpdateUserDialog extends javax.swing.JDialog {
 
-    //Atribut
+    //attribue -------------------------------------------------------------------------------
     private int id;
     private PropertyChangeSupport listeners = new PropertyChangeSupport(this);
 
-    //Constructeur
-    //Methode
+    // Constructeur -------------------------------------------------------------------------------
+    public UpdateUserDialog(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+    }
+
+    // Methodes -------------------------------------------------------------------------------
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         listeners.addPropertyChangeListener(listener);
     }
 
-    //Get
+    // get -------------------------------------------------------------------------------
     public int getId() {
         return this.id;
     }
@@ -44,11 +50,15 @@ public class UpdateUserDialog extends javax.swing.JDialog {
         return this.updateMotDePasseUser.getText();
     }
 
+    public String getVerifMotDePasseUser() {
+        return this.updateVerifMotDePasseUser.getText();
+    }
+
     public String getAdresseEmail() {
         return this.updateAdresseMailUser.getText();
     }
 
-    //Set
+    // Set -------------------------------------------------------------------------------
     public void setID(int id) {
         this.id = id;
     }
@@ -69,16 +79,63 @@ public class UpdateUserDialog extends javax.swing.JDialog {
         this.updateMotDePasseUser.setText(mdp);
     }
 
+    public void setVerifMotDePasseUser(String verifMdp) {
+        this.updateVerifMotDePasseUser.setText(verifMdp);
+    }
+
     public void setAdresseEmail(String email) {
         this.updateAdresseMailUser.setText(email);
     }
 
-    /**
-     * Creates new form UpdateUserJDialog
-     */
-    public UpdateUserDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
+    //set defaultData -------------------------------------------------------------------------------
+    public void setDefaultData() {
+        this.checkBoxModifAfficheNewMDP.setSelected(false);
+        this.checkBoxModifAfficheVerifMDP.setSelected(false);
+
+        this.updateMotDePasseUser.setEchoChar('*');
+        this.updateVerifMotDePasseUser.setEchoChar('*');
+    }
+
+    // Autre méthodes -------------------------------------------------------------------------------
+    public boolean verifMotDePasse() {
+        if (String.valueOf(this.updateMotDePasseUser.getPassword()).equals(String.valueOf(this.updateVerifMotDePasseUser.getPassword()))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public int verifeFormulaire() {
+        String email = getAdresseEmail();
+        if (updatePrenomUser.getText().equals("")
+                || updateNomUser.getText().equals("")
+                || updateIdentifiantUser.getText().equals("")
+                || updateAdresseMailUser.getText().equals("")
+                || String.valueOf(this.updateMotDePasseUser.getPassword()).equals("")) {
+            return 1;
+        } else if (!String.valueOf(this.updateMotDePasseUser.getPassword()).equals(String.valueOf(this.updateVerifMotDePasseUser.getPassword()))) {
+            return 2;
+        } else if (!isEmailValid(email)) {
+            return 3;
+        } else {
+            return 4;
+        }
+    }
+
+    public void erreurChamps() {
+        JOptionPane.showMessageDialog(this, "Champs de saisie obligatoire !");
+    }
+
+    public void erreurMDP() {
+        JOptionPane.showMessageDialog(this, "Vérification du mot de passe incorrect !");
+    }
+
+    public void erreurEmails() {
+        JOptionPane.showMessageDialog(this, "Adresse email invalide.");
+    }
+
+    public boolean isEmailValid(String email) {
+        return email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$");
     }
 
     /**
@@ -99,10 +156,14 @@ public class UpdateUserDialog extends javax.swing.JDialog {
         jButtonValiderModif = new javax.swing.JButton();
         updatePrenomUser = new javax.swing.JTextField();
         updateIdentifiantUser = new javax.swing.JTextField();
-        updateMotDePasseUser = new javax.swing.JTextField();
         updateNomUser = new javax.swing.JTextField();
         updateAdresseMailUser = new javax.swing.JTextField();
         jLabelPageModifUtilisateur = new javax.swing.JLabel();
+        updateMotDePasseUser = new javax.swing.JPasswordField();
+        updateVerifMotDePasseUser = new javax.swing.JPasswordField();
+        jLabelVerifMotDePasseUser = new javax.swing.JLabel();
+        checkBoxModifAfficheVerifMDP = new javax.swing.JCheckBox();
+        checkBoxModifAfficheNewMDP = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -130,69 +191,71 @@ public class UpdateUserDialog extends javax.swing.JDialog {
             }
         });
 
-        updatePrenomUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updatePrenomUserActionPerformed(evt);
-            }
-        });
-
-        updateMotDePasseUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateMotDePasseUserActionPerformed(evt);
-            }
-        });
-
-        updateNomUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateNomUserActionPerformed(evt);
-            }
-        });
-
-        updateAdresseMailUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateAdresseMailUserActionPerformed(evt);
-            }
-        });
-
         jLabelPageModifUtilisateur.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         jLabelPageModifUtilisateur.setText("Page Modif Utilisateur");
+
+        jLabelVerifMotDePasseUser.setText("Verification mot-de-passe");
+
+        checkBoxModifAfficheVerifMDP.setText("Afficher le Mot de Passe");
+        checkBoxModifAfficheVerifMDP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkBoxModifAfficheVerifMDPActionPerformed(evt);
+            }
+        });
+
+        checkBoxModifAfficheNewMDP.setText("Afficher le Mot de Passe");
+        checkBoxModifAfficheNewMDP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkBoxModifAfficheNewMDPActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelPageModifUtilisateur)
+                .addGap(0, 361, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
+                        .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabelPrenomUser)
                             .addComponent(jLabelNomUser)
                             .addComponent(jLabelIdentifiantUser)
-                            .addComponent(jLabelMotDePasseUser)
-                            .addComponent(jLabelAdresseEmailUser))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(updateNomUser, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(updateIdentifiantUser, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(updatePrenomUser, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(updateMotDePasseUser, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(updateAdresseMailUser, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonValiderModif)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonRetour))))
+                            .addComponent(jLabelMotDePasseUser)))
+                    .addComponent(jLabelVerifMotDePasseUser)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelAdresseEmailUser)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(updateVerifMotDePasseUser)
+                    .addComponent(updateNomUser)
+                    .addComponent(updateIdentifiantUser)
+                    .addComponent(updatePrenomUser)
+                    .addComponent(updateAdresseMailUser)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabelPageModifUtilisateur)))
-                .addGap(0, 171, Short.MAX_VALUE))
+                        .addComponent(jButtonValiderModif)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonRetour))
+                    .addComponent(updateMotDePasseUser, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkBoxModifAfficheVerifMDP)
+                    .addComponent(checkBoxModifAfficheNewMDP))
+                .addGap(39, 39, 39))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelPageModifUtilisateur)
-                .addGap(141, 141, 141)
+                .addGap(118, 118, 118)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updatePrenomUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelPrenomUser))
@@ -206,17 +269,23 @@ public class UpdateUserDialog extends javax.swing.JDialog {
                     .addComponent(jLabelIdentifiantUser))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelMotDePasseUser)
                     .addComponent(updateMotDePasseUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelMotDePasseUser))
+                    .addComponent(checkBoxModifAfficheNewMDP))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(updateVerifMotDePasseUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelVerifMotDePasseUser)
+                    .addComponent(checkBoxModifAfficheVerifMDP))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateAdresseMailUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelAdresseEmailUser))
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonValiderModif)
                     .addComponent(jButtonRetour))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
 
         pack();
@@ -228,24 +297,24 @@ public class UpdateUserDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonRetourActionPerformed
 
     private void jButtonValiderModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderModifActionPerformed
-        listeners.firePropertyChange("validModif", null, null);
+        listeners.firePropertyChange("validModifUser", null, null);
     }//GEN-LAST:event_jButtonValiderModifActionPerformed
 
-    private void updateAdresseMailUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAdresseMailUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateAdresseMailUserActionPerformed
+    private void checkBoxModifAfficheNewMDPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxModifAfficheNewMDPActionPerformed
+        if (checkBoxModifAfficheNewMDP.isSelected()) {
+            updateMotDePasseUser.setEchoChar((char) 0);
+        } else {
+            updateMotDePasseUser.setEchoChar('*');
+        }
+    }//GEN-LAST:event_checkBoxModifAfficheNewMDPActionPerformed
 
-    private void updateNomUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateNomUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateNomUserActionPerformed
-
-    private void updateMotDePasseUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateMotDePasseUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateMotDePasseUserActionPerformed
-
-    private void updatePrenomUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePrenomUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updatePrenomUserActionPerformed
+    private void checkBoxModifAfficheVerifMDPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxModifAfficheVerifMDPActionPerformed
+        if (checkBoxModifAfficheVerifMDP.isSelected()) {
+            updateVerifMotDePasseUser.setEchoChar((char) 0);
+        } else {
+            updateVerifMotDePasseUser.setEchoChar('*');
+        }
+    }//GEN-LAST:event_checkBoxModifAfficheVerifMDPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,6 +360,8 @@ public class UpdateUserDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox checkBoxModifAfficheNewMDP;
+    private javax.swing.JCheckBox checkBoxModifAfficheVerifMDP;
     private javax.swing.JButton jButtonRetour;
     private javax.swing.JButton jButtonValiderModif;
     private javax.swing.JLabel jLabelAdresseEmailUser;
@@ -299,10 +370,12 @@ public class UpdateUserDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelNomUser;
     private javax.swing.JLabel jLabelPageModifUtilisateur;
     private javax.swing.JLabel jLabelPrenomUser;
+    private javax.swing.JLabel jLabelVerifMotDePasseUser;
     private javax.swing.JTextField updateAdresseMailUser;
     private javax.swing.JTextField updateIdentifiantUser;
-    private javax.swing.JTextField updateMotDePasseUser;
+    private javax.swing.JPasswordField updateMotDePasseUser;
     private javax.swing.JTextField updateNomUser;
     private javax.swing.JTextField updatePrenomUser;
+    private javax.swing.JPasswordField updateVerifMotDePasseUser;
     // End of variables declaration//GEN-END:variables
 }

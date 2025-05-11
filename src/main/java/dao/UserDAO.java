@@ -22,13 +22,15 @@ import model.User;
  */
 public class UserDAO {
 
+    // atribue -------------------------------------------------------------------------------
     private Connection connexion;
 
-    // Constructeur USERDAO
+    // Constructeur USERDAO -------------------------------------------------------------------------------
     public UserDAO() {
         this.connexion = MySQLConnexion.getConnexion();
     }
 
+    // Méthode -------------------------------------------------------------------------------
     // Méthode récupérant tout les utilisateurs dans la base donnée.
     public ArrayList<User> findAll() {
         try {
@@ -114,7 +116,7 @@ public class UserDAO {
 
     public User createUser(User utilisateur) {
         try {
-            String query = "INSERT INTO USER ( `PRENOM_USER`, `NOM_USER`, `IDENTIFIANT_USER`, `MOT_DE_PASSE_USER`, `ADRESSE_MAIL_USER`) VALUES (?,?,?,?,?)";
+            String query = "INSERT INTO USER ( PRENOM_USER, NOM_USER, IDENTIFIANT_USER, MOT_DE_PASSE_USER, ADRESSE_MAIL_USER) VALUES (?,?,?,?,?)";
             PreparedStatement ps = this.connexion.prepareStatement(query);
             System.out.println(query);
             ps.setString(1, utilisateur.getPrenom());
