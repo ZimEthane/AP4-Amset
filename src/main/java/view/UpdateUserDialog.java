@@ -92,6 +92,8 @@ public class UpdateUserDialog extends javax.swing.JDialog {
         this.checkBoxModifAfficheNewMDP.setSelected(false);
         this.checkBoxModifAfficheVerifMDP.setSelected(false);
 
+        this.updateVerifMotDePasseUser.setText("");
+
         this.updateMotDePasseUser.setEchoChar('*');
         this.updateVerifMotDePasseUser.setEchoChar('*');
     }
